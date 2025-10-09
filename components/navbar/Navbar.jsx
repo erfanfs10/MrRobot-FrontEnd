@@ -25,7 +25,7 @@ const Navbar = () => {
         
         <div className="flex gap-3 md:hidden">
           <Account/>
-          {/* <Cart/> */}
+          <Cart/>
         </div>
 
         <div dir="rtl" className="flex w-full max-w-lg place-self-center">
@@ -40,7 +40,7 @@ const Navbar = () => {
           <CustomSidebarTrigger />
         </div>
         <div className="flex gap-3">
-          {/* <Cart className={"max-md:hidden"}/> */}
+          <Cart className={"max-md:hidden"}/>
           <Account className={"max-md:hidden"}/>
           <ModeToggle className="max-md:hidden"/>
         </div>
