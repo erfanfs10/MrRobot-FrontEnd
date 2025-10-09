@@ -1,5 +1,13 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar/Navbar";
+import { NavigationProvider } from "@/contexts/NavigationContext";
+import Navigation from "@/components/navigation/Navigation";
+import { SessionProvider } from "next-auth/react";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { CartProvider } from "@/contexts/CartContext";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,14 +18,30 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <CartProvider>
+          <NavigationProvider>
+            <SessionProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <SidebarProvider className="flex flex-col" defaultOpen={false}>
+                  <Navbar />
+                  <SidebarInset className="">
+                    <main className="w-auto h-full px-3 py-1 lg:px-5 lg:py-1 mt-17 md:mt-33 border-1 rounded-lg z-0">
+                      <Navigation />
+                      {children}
+                      <Footer />
+                    </main>
+                  </SidebarInset>
+                  <AppSidebar />
+                </SidebarProvider>
+              </ThemeProvider>
+            </SessionProvider>
+          </NavigationProvider>
+        </CartProvider>
       </body>
     </html>
   );
