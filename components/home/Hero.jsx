@@ -10,11 +10,11 @@ const Hero = () => {
       className=" relative z-0 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start justify-between my-10"
     >
       <div className="flex flex-col col-span-1 items-center lg:items-start justify-center gap-10">
-        <h1 className="font-bold text-3xl lg:text-4xl leading-12">
-          کامل ترین فروشگاه کامپیوتر پیدا کردی 🤘
+        <h1 className="font-bold text-2xl lg:text-3xl leading-12">
+          سیستم خودت رو قوی‌تر کن، کمتر خرج کن. 🤘
         </h1>
         <h3 className="font-semibold text-lg lg:text-xl">
-          از قطعات و تجهیزات مبتدی تا حرفه‌ای — همه‌چیز برای گیمیر اینجاست.
+          قطعات حرفه‌ای گیمینگ — نو یا کارکرده — با تضمین عملکرد و کیفیت واقعی.
         </h3>
         <div className="flex gap-2 lg:gap-5">
           <Button className="font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 hover:cursor-pointer">
