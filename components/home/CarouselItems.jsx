@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "@/components/Image";
 import {
   Card,
   CardContent,
@@ -56,10 +57,8 @@ const CarouselItems = ({ items }) => {
                   </p>
                 </CardHeader>
                 <CardContent className="px-0">
-                  <img
-                    src={
-                      "http://192.168.254.40:8080/static/" + item.primary_image
-                    }
+                  <Image
+                    src={item.primary_image}
                     alt={item.title}
                     className="p-2 object-contain"
                   />
