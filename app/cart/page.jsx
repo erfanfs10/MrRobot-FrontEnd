@@ -21,8 +21,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { MdDeleteForever } from "react-icons/md";
 import { useCart } from "@/contexts/CartContext";
-import displayPrice from "@/hooks/DisplayPrice";
-import displayDiscount from "@/hooks/DisplayDiscount";
+import displayPrice from "@/utils/DisplayPrice";
+import displayDiscount from "@/utils/DisplayDiscount";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import Empty from "@/components/Empty";
 

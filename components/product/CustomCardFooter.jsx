@@ -1,7 +1,7 @@
 'use client';
 
-import displayPrice from '@/hooks/DisplayPrice'
-import displayDiscount from '@/hooks/DisplayDiscount';
+import displayPrice from '@/utils/DisplayPrice'
+import displayDiscount from '@/utils/DisplayDiscount';
 
 const CustomCardFooter = ({item}) => {
     if (item.status === "available") {

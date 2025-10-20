@@ -7,7 +7,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import PostTags from "./PostTags";
-import displayDate from "@/hooks/DisplayDate";
+import displayDate from "@/utils/DisplayDate";
 import Link from "next/link";
 import {
   Carousel,

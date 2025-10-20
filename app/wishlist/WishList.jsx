@@ -5,7 +5,7 @@ import Image from "@/components/Image";
 import Link from "next/link";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
-import displayBadge from "@/hooks/DisplayBadge";
+import displayBadge from "@/utils/DisplayBadge";
 import {
   Card,
   CardContent,

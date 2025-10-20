@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
-import displayBadge from "@/hooks/DisplayBadge";
+import displayBadge from "@/utils/DisplayBadge";
 
 const CarouselItems = ({ items }) => {
   return (

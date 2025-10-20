@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
-import displayBadge from "@/hooks/DisplayBadge";
+import displayBadge from "@/utils/DisplayBadge";
 
 const Products = ({ products }) => {
   // const router = useRouter();

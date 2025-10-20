@@ -26,9 +26,9 @@ import {
 } from "@/components/ui/carousel";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import ReviewStar from "@/components/product/ReviewStar";
-import displayPrice from "@/hooks/DisplayPrice";
-import displayDiscount from "@/hooks/DisplayDiscount";
-import displayBadge from "@/hooks/DisplayBadge";
+import displayPrice from "@/utils/DisplayPrice";
+import displayDiscount from "@/utils/DisplayDiscount";
+import displayBadge from "@/utils/DisplayBadge";
 import { deleteWishlist, createWishlist } from "@/app/wishlist/EditWishList";
 import CarouselPosts from "@/components/post/CarouselPosts";
 

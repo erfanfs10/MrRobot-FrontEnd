@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import displayDate from "@/hooks/DisplayDate";
+import displayDate from "@/utils/DisplayDate";
 import PostTags from "./PostTags";
 
 const PostDetail = ({ data }) => {

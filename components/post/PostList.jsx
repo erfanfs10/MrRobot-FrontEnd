@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
-import displayDate from "@/hooks/DisplayDate";
+import displayDate from "@/utils/DisplayDate";
 import PostTags from "./PostTags";
 
 const PostList = ({ posts }) => {
