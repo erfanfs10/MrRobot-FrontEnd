@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { CartProvider } from "@/contexts/CartContext";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
+import { customFonts } from "@/public/fonts/font";
 import Footer from "@/components/Footer";
 
 export const metadata = {
@@ -16,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={customFonts.className}>
       <body>
         <CartProvider>
           <NavigationProvider>
