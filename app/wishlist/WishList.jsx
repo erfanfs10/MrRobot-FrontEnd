@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "@/components/Image";
+import { MdFavorite } from "react-icons/md";
+
 import Link from "next/link";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
@@ -13,7 +15,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import Buttons from "./Buttons";
-import Empty from "@/components/Empty";
+import CustomEmpty from "@/components/CustomEmpty";
 
 const WishList = ({ products }) => {
   const navigationItems = [
@@ -25,7 +27,11 @@ const WishList = ({ products }) => {
   return (
     <>
       <UpdateNavigation items={navigationItems} />
-      {Products.length < 1 && <Empty text={"لیست مورد علاقه شما خالیه"} />}
+      {Products.length < 1 && (
+        <CustomEmpty title={"لیست مورد علاقه شما خالیه"}>
+          <MdFavorite className="text-destructive" />
+        </CustomEmpty>
+      )}
 
       <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-start gap-3 lg:gap-5 my-10">
         {/* mobile content */}

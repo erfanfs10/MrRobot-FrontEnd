@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "@/components/Image";
+import { TiShoppingCart } from "react-icons/ti";
 import {
   Card,
   CardContent,
@@ -24,7 +25,7 @@ import { useCart } from "@/contexts/CartContext";
 import displayPrice from "@/utils/DisplayPrice";
 import displayDiscount from "@/utils/DisplayDiscount";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
-import Empty from "@/components/Empty";
+import CustomEmpty from "@/components/CustomEmpty";
 
 const CartPage = () => {
   const {
@@ -170,7 +171,9 @@ const CartPage = () => {
               </TableBody>
             </Table>
           ) : (
-            <Empty text={"سبد خرید شما خالیه"} />
+            <CustomEmpty title={"سبد خرید شما خالیه"}>
+              <TiShoppingCart className="size-8" />
+            </CustomEmpty>
           )}
 
           {cart.map((product) => (
