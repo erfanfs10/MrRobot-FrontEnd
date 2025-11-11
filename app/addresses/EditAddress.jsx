@@ -2,9 +2,22 @@
 import { auth } from "@/auth";
 import { API_URL } from "@/apiUrl";
 
-export async function updateAddress(addressID, newAddress, newTitle) {
+export async function createAddress(title, address) {
   const session = await auth();
 
+  const res = await fetch(`${API_URL}api/addresses/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      user_id: session.user.user_id,
+    },
+    body: JSON.stringify({ address: address, title: title }),
+  });
+  return { data: await res.json(), status: res.status };
+}
+
+export async function updateAddress(addressID, newTitle, newAddress) {
+  const session = await auth();
   const res = await fetch(`${API_URL}api/addresses/${addressID}/`, {
     method: "PATCH",
     headers: {
@@ -13,7 +26,7 @@ export async function updateAddress(addressID, newAddress, newTitle) {
     },
     body: JSON.stringify({ address: newAddress, title: newTitle }),
   });
-  return res.status;
+  return { data: await res.json(), status: res.status };
 }
 
 export async function deleteAddress(addressID) {
@@ -27,18 +40,4 @@ export async function deleteAddress(addressID) {
     },
   });
   return res.status;
-}
-
-export async function createAddress(title, address) {
-  const session = await auth();
-
-  const res = await fetch(`${API_URL}api/addresses/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      user_id: session.user.user_id,
-    },
-    body: JSON.stringify({ address: address, title: title }),
-  });
-  return { data: await res.json(), status: res.status };
 }
