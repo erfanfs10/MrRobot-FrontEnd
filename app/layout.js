@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { CartProvider } from "@/contexts/CartContext";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { customFonts } from "@/public/fonts/font";
 import Footer from "@/components/Footer";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
                     <main className="w-auto h-full px-3 py-1 lg:px-5 lg:py-1 mt-17 md:mt-33 border-1 rounded-lg z-0">
                       <Navigation />
                       {children}
+                      <Toaster />
                       <Footer />
                     </main>
                   </SidebarInset>
