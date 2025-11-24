@@ -158,7 +158,7 @@ const ProductDetail = ({ product }) => {
 
               if (status === 200) {
                 setWishlistItems(wishlistProductIDs);
-                toast("از لیست مورد علاقه شما حذف شد");
+                toast.info("از لیست مورد علاقه شما حذف شد");
               }
             }}
           >
@@ -180,7 +180,7 @@ const ProductDetail = ({ product }) => {
 
               if (status === 201) {
                 setWishlistItems(wishlistProductIDs);
-                toast("به لیست مورد علاقه شما اضافه شد", {
+                toast.success("به لیست مورد علاقه شما اضافه شد", {
                   action: {
                     label: "مشاهده لیست",
                     onClick: () => redirect("/wishlist", RedirectType.push),

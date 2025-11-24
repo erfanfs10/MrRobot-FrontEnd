@@ -28,7 +28,7 @@ const Buttons = ({ product, setProducts }) => {
         </div>
       ) : (
         <Button
-          disabled={product.status === "av" ? false : true}
+          disabled={product.status === "available" ? false : true}
           size="lg"
           className="w-full font-semibold px-3 py-5 lg:py-4 text-base hover:cursor-pointer"
           onClick={(e) => {
@@ -46,7 +46,7 @@ const Buttons = ({ product, setProducts }) => {
           const { status } = await deleteWishlist(product.id);
 
           if (status === 200) {
-            toast("از لیست مورد علاقه شما حذف شد");
+            toast.info("از لیست مورد علاقه شما حذف شد");
             setProducts((prev) =>
               prev.filter((p) => p.id !== product.id)
             );
