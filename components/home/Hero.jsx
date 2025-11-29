@@ -17,11 +17,11 @@ const Hero = () => {
           قطعات حرفه‌ای گیمینگ — نو یا کارکرده — با تضمین عملکرد و کیفیت واقعی.
         </h3>
         <div className="flex gap-2 lg:gap-5">
-          <Button className="font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 hover:cursor-pointer">
+          {/* <Button className="font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 hover:cursor-pointer">
             نمایش همه محصولات
-          </Button>
+          </Button> */}
           <Button className="font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 hover:cursor-pointer">
-            <Link href="/categories" rel="noopener noreferrer">
+            <Link href="/productTypes" rel="noopener noreferrer">
               نمایش دسته بندی ها
             </Link>
           </Button>
@@ -32,74 +32,74 @@ const Hero = () => {
         <div className="grid grid-cols-4 grid-rows-2 items-center gap-5">
           <div className="col-span-1 row-span-1">
             <Image
-              src="/gpu.webp"
+              src="/heroImages/gpu.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
 
           <div className="col-span-1 row-span-1">
             <Image
-              src="/cpu.webp"
+              src="/heroImages/cpu.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
           <div className="col-span-1 row-span-1">
             <Image
-              src="/ram.webp"
+              src="/heroImages/ram.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
           <div className="col-span-1 row-span-1">
             <Image
-              src="/mb.webp"
+              src="/heroImages/mb.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
           <div className="col-span-1 row-span-1">
             <Image
-              src="/psu.webp"
+              src="/heroImages/psu.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
           <div className="col-span-1 row-span-1">
             <Image
-              src="/headphone.webp"
+              src="/heroImages/headphone.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
           <div className="col-span-1 row-span-1">
             <Image
-              src="/mouse.webp"
+              src="/heroImages/mouse.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
           <div className="col-span-1 row-span-1">
             <Image
-              src="/keyboard.webp"
+              src="/heroImages/keyboard.webp"
               width={500}
               height={500}
-              alt="kms"
+              alt="MrRobot"
               className="lg:grayscale hover:grayscale-0 duration-200 object-contain hover:scale-110"
             />
           </div>
