@@ -61,10 +61,10 @@ const Products = ({ products }) => {
   // }, [filters]);
 
   const navigationItems = [
-    { label: "دسته‌بندی‌ها", href: "/categories" },
+    { label: "دسته‌بندی‌ها", href: "/productTypes" },
     {
       label: products.length > 0 ? products[0].category_farsi : "",
-      href: products.length > 0 ? `/categories/${products[0].category}` : "",
+      href: products.length > 0 ? `/productTypes/${products[0].product_type}` : "",
     },
   ];
 
@@ -102,19 +102,11 @@ const Products = ({ products }) => {
                   </div>
 
                   <div className="col-span-1">
-                    {product.category === "guitar" ? (
-                      <Image
-                        src={product.primary_image}
-                        alt={product.title}
-                        className="-rotate-90 w-full h-full object-contain rounded-xl"
-                      />
-                    ) : (
-                      <Image
-                        src={product.primary_image}
-                        alt={product.title}
-                        className="w-full h-full object-contain rounded-xl"
-                      />
-                    )}
+                    <Image
+                      src={product.primary_image}
+                      alt={product.title}
+                      className="w-full h-full object-contain rounded-xl"
+                    />
                   </div>
                 </div>
               </Link>
@@ -122,7 +114,7 @@ const Products = ({ products }) => {
           </div>
 
           {/* desktop content */}
-          <div className="max-md:hidden grid md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5">
+          <div className="max-md:hidden grid md:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5">
             {products.map((product) => (
               <Link
                 key={product.id}
@@ -144,7 +136,7 @@ const Products = ({ products }) => {
                     <Image
                       src={product.primary_image}
                       alt={product.title}
-                      className="p-2 object-contain"
+                      className="p-2 object-contain rounded-xl"
                     />
                   </CardContent>
                   <CardFooter className="flex px-4 pt-0">
