@@ -20,13 +20,13 @@ const ProductTypes = ({ items }) => {
         {items.map((item) => (
           <Link key={item.id} href={`productTypes/${item.title}`} rel="noopener noreferrer">
             <Card
-              className="col-span-1 hover:scale-105 duration-200 bg-secondary py-3"
+              className="col-span-1 hover:scale-105 duration-200 bg-secondary p-2"
             >
-              <CardContent className="relative px-0 h-[90px] md:h-[180px] lg:h-[200px]">
+              <CardContent className="px-0">
                 <img
                   src={"http://192.168.254.40:8080/static/" + item.image}
                   alt="sf"
-                  className="absolute w-full object-contain h-[110px] md:h-[200px] lg:h-[220px]"
+                  className="p-1 object-contain rounded-xl"
                 // mask-b-from-70% mask-b-to-95%
                 />
               </CardContent>
