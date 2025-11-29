@@ -20,17 +20,14 @@ const GpuSlide = () => {
 
         <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-10 px-6 py-12 text-center lg:py-40 lg:px-0">
           <h1 className="text-3xl font-bold text-white lg:text-4xl">
-            🤘 کامل ترین فروشگاه کامپیوتر پیدا کردی
+            🤘 انواع و اقسام کارت گرافیک 
           </h1>
           <h3 className="font-semibold text-lg lg:text-xl text-white">
             از قطعات و تجهیزات مبتدی تا حرفه‌ای — همه‌چیز برای گیمیر اینجاست
           </h3>
           <div className="flex gap-2 lg:gap-5">
             <Button className="text-black bg-white font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 cursor-pointer hover:bg-gray-200">
-                نمایش همه محصولات
-            </Button>
-            <Button className="text-black bg-white font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 cursor-pointer hover:bg-gray-200">
-              <Link href="/categories" rel="noopener noreferrer">نمایش دسته بندی ها</Link>
+              <Link href="/productTypes/GPU" rel="noopener noreferrer">نمایش</Link>
             </Button>
           </div>
         </div>

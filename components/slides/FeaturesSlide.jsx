@@ -27,10 +27,7 @@ const FeaturesSlide = () => {
           </h3>
           <div className="flex gap-2 lg:gap-5">
             <Button className="text-black bg-white font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 cursor-pointer hover:bg-gray-200">
-                نمایش همه محصولات
-            </Button>
-            <Button className="text-black bg-white font-semibold py-6 px-2 text-md lg:text-xl hover:scale-110 duration-200 cursor-pointer hover:bg-gray-200">
-              <Link href="/categories" rel="noopener noreferrer">نمایش دسته بندی ها</Link>
+              <Link href="/productTypes" rel="noopener noreferrer">نمایش دسته بندی ها</Link>
             </Button>
           </div>
         </div>
