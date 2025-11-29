@@ -14,7 +14,7 @@ const displayBadge = (used) => {
         return (
             <Badge
                 variant="default"
-                className="absolute top-2 right-2 text-xs lg:text-sm"
+                className="absolute -top-2 -right-2 text-xs lg:text-sm"
             >
                 آکبند
             </Badge>
