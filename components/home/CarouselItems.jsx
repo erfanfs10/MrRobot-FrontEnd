@@ -60,7 +60,7 @@ const CarouselItems = ({ items }) => {
                   <Image
                     src={item.primary_image}
                     alt={item.title}
-                    className="p-2 object-contain"
+                    className="p-2 object-contain rounded-xl"
                   />
                 </CardContent>
                 <CardFooter className="flex px-4 pt-0">
