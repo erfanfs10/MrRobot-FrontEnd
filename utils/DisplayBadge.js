@@ -5,7 +5,7 @@ const displayBadge = (used) => {
         return (
             <Badge
                 variant="destructive"
-                className="absolute top-2 right-2 text-xs lg:text-sm"
+                className="absolute max-md:top-2 lg:-top-2 max-md:left-2 lg:-right-2 text-xs lg:text-sm"
             >
                 کارکرده
             </Badge>
@@ -14,7 +14,7 @@ const displayBadge = (used) => {
         return (
             <Badge
                 variant="default"
-                className="absolute -top-2 -right-2 text-xs lg:text-sm"
+                className="absolute max-md:top-2 lg:-top-2 max-md:left-2 lg:-right-2 text-xs lg:text-sm"
             >
                 آکبند
             </Badge>
