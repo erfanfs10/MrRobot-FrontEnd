@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Image from "@/components/Image";
 import Link from "next/link";
 import {
@@ -21,44 +21,70 @@ import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
 import displayBadge from "@/utils/DisplayBadge";
 
-const Products = ({ products }) => {
-  // const router = useRouter();
-  // const query = useSearchParams();
+const Products = ({ products, productFilters }) => {
 
-  // useEffect(() => {
-  //     const queryObj = Object.entries(filters)
-  //         .filter(([_, v]) => v)
-  //         .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+  const [filters, setFilters] = useState({
+    brand: "",
+    attributes: {} // key = attribute_id, value = selected value
+  });
+  const [filteredProducts, setFilteredProducts] = useState(products)
 
-  //     const search = new URLSearchParams(queryObj).toString();
-  //     router.replace(`?${search}`, { shallow: true });
-  // }, [filters]);
-
-  const [filters, setFilters] = useState({});
-
-  const updateFilter = (key, value) => {
+  function updateBrandFilter(key, value) {
     setFilters((prev) => ({
       ...prev,
-      [key]: value || undefined, // Clean up falsy values
-    }));
-  };
+      [key]: value
+    }))
+  }
 
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      return product.discount !== "0.00";
-    });
-  }, [filters, products]);
+  function updateAttributeFilter(attributeId, value) {
+    setFilters((prev) => ({
+      ...prev,
+      attributes: {
+        ...prev.attributes,
+        [attributeId]: value
+      }
+    }))
+  }
+
+  useEffect(() => {
+    let result = products
+
+    // Filter by brand
+    if (filters.brand) {
+      result = result.filter(
+        (p) => p.brand === filters.brand
+      )
+    }
+
+    const selectedAttributes = filters.attributes
+
+    // If the user has selected any attributes:
+    if (Object.keys(selectedAttributes).length > 0) {
+      result = result.filter((product) => {
+        // For each active filter, check if product contains that attribute and value
+        return Object.entries(selectedAttributes).every(
+          ([attrId, selectedValue]) => {
+            if (!selectedValue) return true
+
+            return product.attributes.some(
+              (attr) =>
+                String(attr.attribute_id) === String(attrId) &&
+                String(attr.value) === String(selectedValue)
+            )
+          }
+        )
+      })
+    }
+
+    setFilteredProducts(result)
+  }, [filters, products])
 
   const removeFilters = () => {
-    setFilters({});
+    setFilters({
+    brand: "",
+    attributes: {}
+  })
   };
-
-  // useEffect(() => {
-  //     const interval = setInterval(() => {
-  //         console.log(filters, Object.keys(filters).length)
-  //     }, 1000);
-  //     return () => clearInterval(interval);
-  // }, [filters]);
 
   const navigationItems = [
     { label: "دسته‌بندی‌ها", href: "/productTypes" },
@@ -72,6 +98,12 @@ const Products = ({ products }) => {
     <>
       <UpdateNavigation items={navigationItems} />
       {products.length < 1 && (
+        <p className="text-center">
+          با عرض پوزش محصولی در این دسته بندی وجود ندارد
+        </p>
+      )}
+
+      {filteredProducts.length < 1 && (
         <p className="text-center">
           با عرض پوزش محصولی در این دسته بندی وجود ندارد
         </p>
@@ -115,7 +147,7 @@ const Products = ({ products }) => {
 
           {/* desktop content */}
           <div className="max-md:hidden grid md:grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-5">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Link
                 key={product.id}
                 href={`/products/${product.title}`}
@@ -151,7 +183,7 @@ const Products = ({ products }) => {
         {/* mobile filter */}
         {/* <div>
 
-                </div> */}
+        </div> */}
 
         {/* desktop filter */}
         <div className="max-md:hidden col-span-1 sticky top-45">
@@ -159,38 +191,49 @@ const Products = ({ products }) => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <p className="text-base lg:text-lg">فیلترها</p>
-                {Object.keys(filters).length > 0 && (
-                  <Button onClick={removeFilters}>حذف فیلترها</Button>
-                )}
+                <Button onClick={removeFilters}>حذف فیلترها</Button>
               </div>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col gap-2">
+                <label className="text-sm lg:text-md ">برند</label>
                 <Select
                   dir="rtl"
-                  onValueChange={(e) => updateFilter("brand", e)}
+                  value={filters.brand || ""}
+                  onValueChange={(value) => {
+                    updateBrandFilter("brand", value)
+                  }}
                 >
                   <SelectTrigger className="w-full text-base">
-                    <SelectValue placeholder="برند" />
+                    <SelectValue placeholder="انتخاب نشده"/>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="PRS">PRS</SelectItem>
-                    <SelectItem value="Jackson">Jackson</SelectItem>
-                    <SelectItem value="Ibanez">Ibanez</SelectItem>
+                    {productFilters.brands.map((brand)=>(
+                      <SelectItem key={brand.id} value={brand.title}>{brand.title}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
-                <Select
-                  dir="rtl"
-                  onValueChange={(e) => updateFilter("product_type", e)}
-                >
-                  <SelectTrigger className="w-full text-base">
-                    <SelectValue placeholder="نوع" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="electric">Electric</SelectItem>
-                    <SelectItem value="classic">classic</SelectItem>
-                  </SelectContent>
-                </Select>
+                {productFilters.attributes.map((attr)=>(
+                  <div key={attr.id}>
+                    <label className="text-sm lg:text-md ">{attr.title}</label>
+                    <Select
+                      dir="rtl"
+                      value={filters.attributes[attr.id] || ""}
+                      onValueChange={(value) => {
+                      updateAttributeFilter(attr.id, value)
+                    }}
+                    >
+                      <SelectTrigger className="w-full text-base">
+                        <SelectValue placeholder="انتخاب نشده" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {attr.values.map((item)=>(
+                          <SelectItem key={item} value={item}>{item}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                ))}    
               </div>
             </CardContent>
           </Card>
