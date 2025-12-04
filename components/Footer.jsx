@@ -23,7 +23,7 @@ const Footer = () => {
           <Link href="/" className="text-md">
             صفحه اصلی
           </Link>
-          <Link href="/categories" className="text-md">
+          <Link href="/productTypes" className="text-md">
             دسته بندی محصولات
           </Link>
         </div>
