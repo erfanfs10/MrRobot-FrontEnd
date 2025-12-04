@@ -125,7 +125,7 @@ const Products = ({ products, productFilters }) => {
                   {displayBadge(product.used)}
 
                   <div className="col-span-1 flex flex-col items-start justify-between p-3">
-                    <p className="font-bold text-lg tracking-wide">
+                    <p className="font-bold text-lg tracking-wide mt-7">
                       {product.brand} {product.title}
                     </p>
                     <div className="flex flex-col gap-3">
@@ -137,7 +137,7 @@ const Products = ({ products, productFilters }) => {
                     <Image
                       src={product.primary_image}
                       alt={product.title}
-                      className="w-full h-full object-contain rounded-xl"
+                      className="object-contain rounded-xl"
                     />
                   </div>
                 </div>
