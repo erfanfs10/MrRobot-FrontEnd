@@ -8,7 +8,6 @@ import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { IoShareSocial } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import {
@@ -28,7 +27,7 @@ import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import ReviewStar from "@/components/product/ReviewStar";
 import displayPrice from "@/utils/DisplayPrice";
 import displayDiscount from "@/utils/DisplayDiscount";
-import displayBadge from "@/utils/DisplayBadge";
+import productDetailBadge from "@/utils/ProductDetailBadge";
 import Logo from "../Logo";
 import { deleteWishlist, createWishlist } from "@/app/wishlist/EditWishList";
 import CarouselPosts from "@/components/post/CarouselPosts";
@@ -205,8 +204,107 @@ const ProductDetail = ({ product }) => {
       <UpdateNavigation items={navigationItems} />
       <div className="relative grid grid-cols-1 lg:grid-cols-3 items-start rounded-xl gap-10 mb-15 p-2">
         
+        <div className="col-span-1">
+          <div className="flex flex-col">
+            <div className="border-y-4 p-2 rounded-lg flex items-center justify-center">
+              <Image
+                src={primaryImage}
+                alt={product.title}
+                className="p-1 object-contain size-70 lg:size-100 rounded-lg"
+              />
+            </div>
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+              }}
+              className="w-full"
+              setApi={setApi}
+            >
+              <CarouselContent className="py-2 ml-1 lg:ml-1">
+                {product.produc_images.map((image) => (
+                  <CarouselItem
+                    key={image.id}
+                    className="basis-1/2 lg:basis-1/3 -pl-1 lg:pl-5"
+                  >
+                    <div
+                      className={`rounded-lg flex items-center justify-center hover:scale-105 duration-200 ${
+                        primaryImage === image.image
+                          ? "border-y-4"
+                          : "border-y-1"
+                      }`}
+                    >
+                      <Image
+                        src={image.image}
+                        alt={product.title}
+                        className="p-1 object-contain size-15 lg:size-20 rounded-lg"
+                        onClick={() => (
+                          setPrimaryImage(image.image) 
+                        )}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious variant="default" className="-left-2" />
+              <CarouselNext variant="default" className="-right-2" />
+            </Carousel>
+          </div>
+        </div>
+      
         <div className="col-span-1 h-full">
-          <div className="flex flex-col h-full justify-between">
+          <div className="flex flex-col gap-10 h-full justify-between">
+            <div className="flex flex-col gap-5">
+              <div className="relative flex w-full items-start justify-between">
+                <h3 className="font-bold text-lg lg:text-2xl tracking-wide">
+                  {product.brand} {product.title} {product.variant || ""}
+                </h3>
+                {productDetailBadge(product.used)}
+              </div>
+
+              <div className="flex w-full items-end justify-between">
+                <ReviewStar point={Number(product.point.split(".")[0])} />
+                <div className="flex gap-7">
+                  {GetWishlists()}
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <IoShareSocial className="size-6 hover:scale-110 duration-200 cursor-pointer" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>به اشتراک گذاری محصول</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5">
+              {product.attributes.slice(0,3).map((attr) => (
+                <div
+                  key={attr.id}
+                  className="col-span-1 text-base rounded-lg border-x-2"
+                >
+                  <div className="flex flex-col gap-2 items-center">
+                    <p className="font-semibold text-base lg:text-lg">
+                      {attr.attribute_title}
+                    </p>
+                    <p className="text-base">{attr.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Button 
+              variant="outline"
+              className="w-full font-semibold py-7 lg:py-6 text-base lg:text-lg hover:cursor-pointer">
+              <a href="#spec"> مشاهده تمامی مشخصات</a>
+            </Button>
+        
+          </div>
+        </div>
+
+        <div className="col-span-1 h-full">
+          <div className="flex flex-col h-full justify-between gap-5">
 
             <div className="flex justify-between items-center">
               <Logo
@@ -218,9 +316,9 @@ const ProductDetail = ({ product }) => {
             </div>
 
             <div className="flex gap-5 items-center text-base lg:text-lg">
-              <p className="border-4 px-10 py-20 rounded-lg">بهترین قیمت</p>
-              <p className="border-4 px-10 py-15 rounded-lg">تضمین اصالت</p>
-              <p className="border-4 px-10 py-10 rounded-lg">گارانتی معتبر</p>
+              <p className="border-4 px-5 lg:px-10 py-3 lg:py-20 rounded-lg text-center">بهترین قیمت</p>
+              <p className="border-4 px-5 lg:px-10 py-3 lg:py-15 rounded-lg text-center">تضمین اصالت</p>
+              <p className="border-4 px-5 lg:px-10 py-3 lg:py-10 rounded-lg text-center">گارانتی معتبر</p>
             </div>
 
             <div className="max-md:hidden flex items-end lg:gap-5 max-md:justify-between">
@@ -267,112 +365,7 @@ const ProductDetail = ({ product }) => {
             </div>
           </div>
         </div>
-      
-        <div className="col-span-1 h-full">
-          <div className="flex flex-col gap-10 h-full justify-between">
-            <div className="flex flex-col gap-5">
-              <div className="relative flex w-full items-start justify-between">
-                <h3 className="font-bold text-lg lg:text-2xl tracking-wide">
-                  {product.brand} {product.title} {product.variant || ""}
-                </h3>
-                {displayBadge(product.used)}
-              </div>
 
-              <div className="flex w-full items-end justify-between">
-                <ReviewStar point={Number(product.point.split(".")[0])} />
-                <div className="flex gap-7">
-                  {GetWishlists()}
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <IoShareSocial className="size-6 hover:scale-110 duration-200 cursor-pointer" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>به اشتراک گذاری محصول</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
-              </div>
-            </div>
-
-            {/* <Separator /> */}
-
-            <div className="grid grid-cols-1 gap-5">
-              {product.attributes.slice(0,3).map((attr) => (
-                <div
-                  key={attr.id}
-                  className="col-span-1 text-base rounded-lg border-x-2"
-                >
-                  <div className="flex flex-col gap-2 items-center">
-                    <p className="font-semibold text-base lg:text-lg">
-                      {attr.attribute_title}
-                    </p>
-                    <p className="text-base">{attr.value}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <Button 
-              variant="outline"
-              className="w-full font-semibold py-7 lg:py-6 text-base lg:text-lg hover:cursor-pointer">
-              <a href="#spec"> مشاهده تمامی مشخصات</a>
-            </Button>
-
-            {/* <div dir="rtl" className="flex justify-between gap-7">
-              {getVariants()}
-            </div> */}
-
-          
-          </div>
-        </div>
-
-        <div className="col-span-1">
-          <div className="flex flex-col">
-            <div className="border-y-4 p-2 rounded-lg flex items-center justify-center">
-              <Image
-                src={primaryImage}
-                alt={product.title}
-                className="p-1 object-contain size-100 rounded-lg"
-              />
-            </div>
-            <Carousel
-              opts={{
-                align: "center",
-                loop: true,
-              }}
-              className="w-full"
-              setApi={setApi}
-            >
-              <CarouselContent className="py-2 ml-5 md:-ml-1 lg:ml-5">
-                {product.produc_images.map((image) => (
-                  <CarouselItem
-                    key={image.id}
-                    className="basis-1/2 md:basis-1/3 lg:basis-1/3 pl-1 md:pl-20 lg:pl-10"
-                  >
-                    <div
-                      className={`rounded-lg flex items-center justify-center hover:scale-105 duration-200 ${
-                        primaryImage === image.image
-                          ? "border-y-4"
-                          : "border-y-1"
-                      }`}
-                    >
-                      <Image
-                        src={image.image}
-                        alt={product.title}
-                        className="p-1 object-contain size-20 rounded-lg"
-                        onClick={() => {
-                          setPrimaryImage(image.image);
-                        }}
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious variant="default" className="-left-2" />
-              <CarouselNext variant="default" className="-right-2" />
-            </Carousel>
-          </div>
-        </div>
       </div>
 
       <div className="flex flex-col gap-10 w-full">
