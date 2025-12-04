@@ -315,7 +315,7 @@ const ProductDetail = ({ product }) => {
             <Button 
               variant="outline"
               className="w-full font-semibold py-7 lg:py-6 text-base lg:text-lg hover:cursor-pointer">
-               مشاهده تمامی مشخصات
+              <a href="#spec"> مشاهده تمامی مشخصات</a>
             </Button>
 
             {/* <div dir="rtl" className="flex justify-between gap-7">
@@ -385,8 +385,9 @@ const ProductDetail = ({ product }) => {
               درباره محصول
             </TabsTrigger>
             <TabsTrigger
+              id='spec'
               value="product-specification"
-              className="py-4 text-sm lg:text-lg text-right font-semibold hover:cursor-pointer"
+              className="scroll-mt-40 py-4 text-sm lg:text-lg text-right font-semibold hover:cursor-pointer"
             >
               مشخصات محصول
             </TabsTrigger>
