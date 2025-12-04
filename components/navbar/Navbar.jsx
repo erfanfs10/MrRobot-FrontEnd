@@ -28,7 +28,7 @@ const Navbar = () => {
           <Cart/>
         </div>
 
-        <div dir="rtl" className="flex w-full max-w-lg place-self-center">
+        <div dir="rtl" className="flex w-full max-w-md lg:max-w-lg place-self-center">
           <Input
             className="text-xs lg:text-base h-10 font-semibold"
             type="search"

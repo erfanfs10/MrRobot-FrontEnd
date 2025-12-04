@@ -16,19 +16,20 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import productTypes from "@/utils/ProductTypes";
 
-export function NavMain({ items }) {
+export function NavMain() {
   return (
     <SidebarGroup>
       <SidebarGroupLabel dir="rtl" className="text-md lg:text-lg">
         محصولات
       </SidebarGroupLabel>
       <SidebarMenu className="data-[state=open]/collapsible:item-center">
-        {items.map((item) => (
+        {productTypes.map((pt) => (
           <Collapsible
-            key={item.title}
+            key={pt.name}
             asChild
-            defaultOpen={item.isActive}
+            defaultOpen={false}
             className="group/collapsible"
           >
             <SidebarMenuItem dir="rtl" className="my-2 mr-2">
@@ -36,27 +37,20 @@ export function NavMain({ items }) {
                 <SidebarMenuButton
                   variant="inline"
                   size="lg"
-                  tooltip={item.title}
+                  tooltip={pt.name}
                 >
-                  {/* <Image
-                    src={item.icon}
-                    alt="sdf"
-                    width={32}
-                    height={32}
-                    className="size-8"
-                  /> */}
-                  <span className="text-lg lg:text-xl">{item.title}</span>
+                  <span className="text-lg lg:text-xl">{pt.name}</span>
                   <ChevronDown className="mr-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-180" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
+                  {pt.types.map((item) => (
+                    <SidebarMenuSubItem key={item.url} className="mt-1">
                       <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span className="text-sm lg:text-md">
-                            {subItem.title}
+                        <a href={`/productTypes/${item.url}`}>
+                          <span className="text-base">
+                            {item.name}
                           </span>
                         </a>
                       </SidebarMenuSubButton>
