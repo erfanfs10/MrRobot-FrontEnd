@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import { STATIC_FILES } from "@/apiUrl";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
@@ -24,7 +25,7 @@ const ProductTypes = ({ items }) => {
             >
               <CardContent className="px-0">
                 <img
-                  src={"http://192.168.254.40:8080/static/" + item.image}
+                  src={`${STATIC_FILES}${item.image}`}
                   alt="sf"
                   className="p-1 object-contain rounded-xl"
                 // mask-b-from-70% mask-b-to-95%
