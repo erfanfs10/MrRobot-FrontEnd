@@ -80,7 +80,7 @@ export default function SearchBar() {
           </CardHeader>
           
           <CardContent className="px-0">
-            {results.slice(1,4).map((item) => (
+            {results.slice(0,3).map((item) => (
               <Link
                 key={item.id}
                 href={`/products/${item.title}`}
