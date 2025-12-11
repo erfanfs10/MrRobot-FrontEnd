@@ -8,7 +8,7 @@ const productTypes = [
       {name:"رم", url:"RAM"},
       {name: "هارد", url:"Storage"},
       {name:"منبع تغذیه", url:"Power Supply"},
-      {name:"فن کیس", url:"Case Fans"}
+      {name:"کیس", url:"PC Case"}
     ]
   },
   {
