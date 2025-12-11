@@ -1,15 +1,26 @@
-const displayUsed = (status, used) => {
-    if (status === "av") {
-        if (used) {
-            return <p className="text-xs lg:text-base font-semibold text-yellow-600/70">
+import { Badge } from "@/components/ui/badge"
+
+const displayUsed = (used) => {
+    if (used === true) {
+        return (
+            <Badge
+                variant="destructive"
+                className="text-xs lg:text-sm"
+            >
                 کارکرده
-            </p>
-        } else {
-            return <p className="text-xs lg:text-base font-semibold text-yellow-600/70">
+            </Badge>
+        )
+    } else {
+        return (
+            <Badge
+                variant="default"
+                className="text-xs lg:text-sm"
+            >
                 آکبند
-            </p>
-        }
+            </Badge>
+        )
     }
+ 
 }
 
 export default displayUsed
