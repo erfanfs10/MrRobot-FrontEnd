@@ -26,6 +26,7 @@ import displayPrice from "@/utils/DisplayPrice";
 import displayDiscount from "@/utils/DisplayDiscount";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomEmpty from "@/components/CustomEmpty";
+import displayUsed from "@/utils/DisplayUsed";
 
 const CartPage = () => {
   const {
@@ -105,7 +106,7 @@ const CartPage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <div className="flex items-start gap-5">
+                        <div className="flex items-center gap-5">
                           <div className="w-[100px] lg:w-[150px]">
                             <Image
                               src={product.primary_image}
@@ -114,18 +115,10 @@ const CartPage = () => {
                             />
                           </div>
                           <div className="flex flex-col gap-2">
+                            {displayUsed(product.used)}
                             <p className="text-base lg:text-lg">
                               {product.brand} {product.title}
                             </p>
-                            <div className="flex items-center justify-between">
-                              <button
-                                style={{ backgroundColor: product.color_code }}
-                                className={`rounded-full size-4 ring`}
-                              />
-                              <p className="text-sm lg:text-base">
-                                {product.variant_farsi}
-                              </p>
-                            </div>
                           </div>
                         </div>
                       </Link>
@@ -186,22 +179,15 @@ const CartPage = () => {
                   <Image
                     src={product.primary_image}
                     alt={product.title}
-                    className="p-1 object-contain"
+                    className="p-1 object-contain size-30"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-base lg:text-lg">
+                  {displayUsed(product.used)}
+                  <p className="text-base lg:text-lg font-semibold">
                     {product.brand} {product.title}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <button
-                      style={{ backgroundColor: product.color_code }}
-                      className={`rounded-full size-4 ring`}
-                    />
-                    <p className="text-sm lg:text-base">
-                      {product.variant_farsi}
-                    </p>
-                  </div>
+        
                 </div>
               </div>
               <div className="flex w-full item-center justify-between">
