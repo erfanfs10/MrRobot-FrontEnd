@@ -267,8 +267,10 @@ const CartPage = () => {
               </div>
             </CardContent>
             <CardFooter className="flex-col gap-2">
-              <Button variant="default" className="w-full text-base lg:text-lg">
-                ادامه پرداخت
+              <Button asChild variant="default" className="w-full text-base lg:text-lg">
+                <Link href="/checkout">
+                 ادامه پرداخت
+                </Link>
               </Button>
             </CardFooter>
           </Card>
