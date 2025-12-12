@@ -40,6 +40,7 @@ const AddressCreate = ({ setAddresses }) => {
   });
 
   async function onSubmit(data) {
+
     const { data: createdAddress, status } = await createAddress(
       data.title,
       data.address
@@ -110,14 +111,15 @@ const AddressCreate = ({ setAddresses }) => {
               )}
             />
           </FieldGroup>
-        </form>
-        <Button
-          type="submit"
-          form="form-rhf-demo"
-          className="text-base lg:text-lg"
-        >
+          <Button
+            type="submit"
+            form="form-rhf-demo"
+            className="text-base lg:text-lg"
+          >
           ثبت
         </Button>
+        </form>
+        
       </DialogContent>
     </Dialog>
   );
