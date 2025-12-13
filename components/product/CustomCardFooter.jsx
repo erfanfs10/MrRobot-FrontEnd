@@ -16,7 +16,7 @@ const CustomCardFooter = ({item}) => {
                 {displayDiscount(item)}
             </div>
         )
-    } else if (item.status === "unAvailable") {
+    } else if (item.status === "notAvailable") {
         return <p className="text-red-600/70 font-bold text-sm lg:text-lg">
             ناموجود
         </p>

@@ -114,7 +114,7 @@ const ProductDetail = ({ product }) => {
           {displayDiscount(product)}
         </div>
       );
-    } else if (product.status === "unAvailable") {
+    } else if (product.status === "notAvailable") {
       return (
         <p className="text-red-600/70 font-bold text-sm lg:text-lg">ناموجود</p>
       );
