@@ -6,6 +6,7 @@ import Image from "@/components/Image";
 import { TiShoppingCart } from "react-icons/ti";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import AddressCreate from "../addresses/AddressCreate";
+import { redirect } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import {
     Field,
@@ -48,7 +49,6 @@ const CheckOut = ({ addresses }) => {
     const form = useForm();
 
     async function onCheckoutSubmit(data) {
-
         if (!data.address_id) {
             toast.error("لطفا آدرس خود را مشخص کنید");
             return
@@ -64,6 +64,7 @@ const CheckOut = ({ addresses }) => {
           toast.success("سفارش شما با موفقیعت ثبت شد");
           form.reset();
           clearCart();
+          redirect('/orders')
           
         } else {
           toast("با عرض پوزش لطفا دوباره امتحان کنید");
@@ -102,9 +103,8 @@ const CheckOut = ({ addresses }) => {
             <UpdateNavigation items={navigationItems} />
 
             {cart.length >= 1 ? (
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
-                <div className={`col-span-1 lg:col-span-2 border rounded-lg p-5 shadow-sm`}>
-                    {cart.length >= 1 ? (
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
+                <div className={`col-span-1 lg:col-span-3 border rounded-lg p-5 shadow-sm`}>
                         <Table className="max-lg:hidden">
                             <TableHeader>
                                 <TableRow>
@@ -158,11 +158,6 @@ const CheckOut = ({ addresses }) => {
                                 ))}
                             </TableBody>
                         </Table>
-                    ) : (
-                        <CustomEmpty title={"سبد خرید شما خالیه"}>
-                            <TiShoppingCart className="size-8" />
-                        </CustomEmpty>
-                    )}
 
                     {cart.map((product) => (
                         <div
@@ -245,7 +240,7 @@ const CheckOut = ({ addresses }) => {
                     </form>
                 </div>
 
-                <div className={`col-span-1 lg:col-span-4`}>
+                <div className={`col-span-1 lg:col-span-5`}>
                     <Card dir="rtl" className="">
                         <CardHeader>
                             <CardTitle className="text-lg">صورتحساب</CardTitle>
@@ -296,12 +291,8 @@ const CheckOut = ({ addresses }) => {
                             </div>
                         </CardContent>
                         <CardFooter className="flex-col gap-2">
-                            <Button
-                            
-                            variant="default" type="submit" form="checkout-form" className="w-full text-base lg:text-lg">
-                                {/* <Link href="/checkout"> */}
+                            <Button variant="default" type="submit" form="checkout-form" className="w-full text-base lg:text-lg">
                                  پرداخت
-                                {/* </Link> */}
                             </Button>
                         </CardFooter>
                     </Card>
@@ -309,11 +300,9 @@ const CheckOut = ({ addresses }) => {
             </div>
             ) : (
                 <CustomEmpty title={"سبد خرید شما خالیه"}>
-                <TiShoppingCart className="size-8" />
+                    <TiShoppingCart className="size-8" />
                 </CustomEmpty>
             )}
-
-            
         </>
     )
 }
