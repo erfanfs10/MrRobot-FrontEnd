@@ -33,7 +33,7 @@ const WishList = ({ products }) => {
         </CustomEmpty>
       )}
 
-      <div className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-start gap-3 lg:gap-5 my-10">
+      <div dir="rtl" className="relative grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-start gap-3 lg:gap-5 my-10">
         {/* mobile content */}
 
         <div className="min-md:hidden col-span-1 gap-5">
