@@ -40,7 +40,7 @@ const Account = ({ className }) => {
             <FaLocationDot />
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <p> سفارش های من</p>
+            <Link href={"/orders"}> سفارش های من</Link>
             <FaListUl />
           </DropdownMenuItem>
           <DropdownMenuItem>
