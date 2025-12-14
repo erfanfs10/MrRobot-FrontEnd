@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   Empty,
   EmptyContent,
-  EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
@@ -11,7 +10,7 @@ import {
 
 const CustomEmpty = ({ children, title }) => {
   return (
-    <Empty className="">
+    <Empty className="col-span-full">
       <EmptyHeader>
         <EmptyMedia variant="icon">{children}</EmptyMedia>
         <EmptyTitle>{title}</EmptyTitle>
