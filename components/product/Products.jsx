@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "@/components/Image";
 import Link from "next/link";
+import CustomEmpty from "../CustomEmpty";
 import {
   Card,
   CardContent,
@@ -20,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
 import displayBadge from "@/utils/DisplayBadge";
+import { HiOutlineEmojiSad } from "react-icons/hi";
 import {
   Sheet,
   SheetContent,
@@ -142,9 +144,9 @@ const Products = ({ products, productFilters }) => {
                 </Link>
               )))
           : (
-              <p className="text-center">
-                با عرض پوزش محصولی در این دسته بندی وجود ندارد
-              </p>
+              <CustomEmpty title={"با عرض پوزش محصولی در این دسته بندی وجود ندارد"}>
+                <HiOutlineEmojiSad className="text-destructive" />
+              </CustomEmpty>
             )
           }
           </div>
@@ -307,18 +309,13 @@ const Products = ({ products, productFilters }) => {
             </Link>
           )))
           : (
-            <p className="text-center">
-               با عرض پوزش محصولی در این دسته بندی وجود ندارد
-            </p>
+              <CustomEmpty title={"با عرض پوزش محصولی در این دسته بندی وجود ندارد"}>
+                <HiOutlineEmojiSad className="text-destructive" />
+              </CustomEmpty>
           )
         }
         </div>
       </div>
-
-        {/* mobile filter */}
-        {/* <div>
-
-        </div> */}
 
     </>
   );
