@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ProductSort from "./ProductSort";
 import { Button } from "@/components/ui/button";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
@@ -152,7 +153,10 @@ const Products = ({ products, productFilters }) => {
           </div>
         </div>
         {/* desktop filter */}
-        <div className="col-span-1 sticky top-45">
+        <div className="col-span-1 sticky top-45 flex flex-col gap-5">
+
+          <ProductSort/>
+
           <Card dir="rtl">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -210,10 +214,11 @@ const Products = ({ products, productFilters }) => {
       <div className="min-md:hidden flex flex-col gap-5">
         {/* mobile filter */}
         
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
+            <ProductSort/>
             <Sheet>
               <SheetTrigger asChild>
-                <FaFilter className="size-6"/>
+                <FaFilter className="size-5"/>
               </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
