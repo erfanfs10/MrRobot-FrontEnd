@@ -31,15 +31,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { FaFilter } from "react-icons/fa";
+import ProductPagination from "./ProductPagination";
+import { API_URL } from "@/apiUrl";
 
-const Products = ({ products, productFilters }) => {
+const Products = ({ products, productFilters, productTypeTitle }) => {
 
   const [filters, setFilters] = useState({
-    brand: "",
+    brand: "", // asus, logitech ...
     attributes: {}, // key = attribute_id, value = selected value
     sort: "" // new | view | sell | cheap | exp
   });
-  const [filteredProducts, setFilteredProducts] = useState(products)
+  const [filteredProducts, setFilteredProducts] = useState(products.items)
 
   function updateSort(value) {
   setFilters((prev) => ({
@@ -144,19 +146,19 @@ const Products = ({ products, productFilters }) => {
       }
 
       default:
-        return products;
+        return products.items;
     }
   };
 
   useEffect(() => {
-    let result = products;
+    let result = products.items;
 
     result = filterByBrand(result, filters.brand);
     result = filterByAttributes(result, filters.attributes);
     result = sortProducts(result, filters.sort);
 
     setFilteredProducts(result);
-  }, [filters, products]);
+  }, [filters, products.items]);
 
   const removeFilters = () => {
     setFilters({
@@ -166,12 +168,33 @@ const Products = ({ products, productFilters }) => {
     });
   };
 
+  const [page, setPage] = useState(1);
+  const totalPages = products.total_pages;
+
+  useEffect(() => {
+    fetch(
+      `${API_URL}api/products/product-type/${productTypeTitle}/?page=${page}`
+    , { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        setFilteredProducts(data.items);
+      });
+  }, [page]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [filters]);
+
 
   const navigationItems = [
     { label: "دسته‌بندی‌ها", href: "/productTypes" },
     {
-      label: products.length > 0 ? products[0].category_farsi : "",
-      href: products.length > 0 ? `/productTypes/${products[0].product_type}` : "",
+      label: products.items.length > 0 ? products.items[0].category_farsi : "",
+      href: products.items.length > 0 ? `/productTypes/${products.items[0].product_type}` : "",
     },
   ];
 
@@ -279,6 +302,11 @@ const Products = ({ products, productFilters }) => {
             </CardContent>
           </Card>
         </div>
+        <ProductPagination 
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
 
       {/* mobile content */}
@@ -301,12 +329,6 @@ const Products = ({ products, productFilters }) => {
                     </div>
                   </SheetTitle>
                   <Card dir="rtl">
-                    {/* <CardHeader>
-                      <div className="flex items-center justify-between">
-                        <p className="text-base lg:text-lg">فیلترها</p>
-                        <Button onClick={removeFilters}>حذف فیلترها</Button>
-                      </div>
-                    </CardHeader> */}
                     <CardContent>
                       <div className="flex flex-col gap-2">
                         <label className="text-sm lg:text-md">برند</label>
@@ -392,6 +414,11 @@ const Products = ({ products, productFilters }) => {
           )
         }
         </div>
+        <ProductPagination 
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       </div>
 
     </>
