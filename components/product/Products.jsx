@@ -36,9 +36,17 @@ const Products = ({ products, productFilters }) => {
 
   const [filters, setFilters] = useState({
     brand: "",
-    attributes: {} // key = attribute_id, value = selected value
+    attributes: {}, // key = attribute_id, value = selected value
+    sort: "" // new | view | sell | cheap | exp
   });
   const [filteredProducts, setFilteredProducts] = useState(products)
+
+  function updateSort(value) {
+  setFilters((prev) => ({
+    ...prev,
+    sort: value
+  }));
+}
 
   function updateBrandFilter(key, value) {
     setFilters((prev) => ({
@@ -57,45 +65,107 @@ const Products = ({ products, productFilters }) => {
     }))
   }
 
-  useEffect(() => {
-    let result = products
 
-    // Filter by brand
-    if (filters.brand) {
-      result = result.filter(
-        (p) => p.brand === filters.brand
+  const filterByBrand = (products, brand) => {
+    if (!brand) return products;
+    return products.filter((p) => p.brand === brand);
+  };
+
+  const filterByAttributes = (products, selectedAttributes) => {
+    if (Object.keys(selectedAttributes).length === 0) return products;
+
+    return products.filter((product) =>
+      Object.entries(selectedAttributes).every(
+        ([attrId, selectedValue]) =>
+          !selectedValue ||
+          product.attributes.some(
+            (attr) =>
+              String(attr.attribute_id) === String(attrId) &&
+              String(attr.value) === String(selectedValue)
+          )
       )
-    }
+    );
+  };
 
-    const selectedAttributes = filters.attributes
+  const sortProducts = (products, sort) => {
+    if (!sort) return products;
 
-    // If the user has selected any attributes:
-    if (Object.keys(selectedAttributes).length > 0) {
-      result = result.filter((product) => {
-        // For each active filter, check if product contains that attribute and value
-        return Object.entries(selectedAttributes).every(
-          ([attrId, selectedValue]) => {
-            if (!selectedValue) return true
+    const sorted = [...products];
 
-            return product.attributes.some(
-              (attr) =>
-                String(attr.attribute_id) === String(attrId) &&
-                String(attr.value) === String(selectedValue)
-            )
+    switch (sort) {
+      case "new":
+        return sorted.sort(
+          (a, b) => new Date(b.created) - new Date(a.created)
+        );
+
+      case "view":
+        return sorted.sort((a, b) => b.view - a.view);
+
+      case "sell":
+        return sorted.sort((a, b) => b.sell - a.sell);
+
+      case "cheap": {
+        return sorted.sort((a, b) => {
+          const aInvalid =
+            Number(a.net_price) === 0 || a.status !== "available";
+          const bInvalid =
+            Number(b.net_price) === 0 || b.status !== "available";
+
+          // Push invalid products to the end
+          if (aInvalid && !bInvalid) return 1;
+          if (!aInvalid && bInvalid) return -1;
+
+          // Both valid → sort by price
+          if (!aInvalid && !bInvalid) {
+            return Number(a.net_price) - Number(b.net_price);
           }
-        )
-      })
-    }
 
-    setFilteredProducts(result)
-  }, [filters, products])
+          // Both invalid → keep original order
+          return 0;
+        });
+      }
+
+      case "exp": {
+        return sorted.sort((a, b) => {
+          const aInvalid =
+            Number(a.net_price) === 0 || a.status !== "available";
+          const bInvalid =
+            Number(b.net_price) === 0 || b.status !== "available";
+
+          if (aInvalid && !bInvalid) return 1;
+          if (!aInvalid && bInvalid) return -1;
+
+          if (!aInvalid && !bInvalid) {
+            return Number(b.net_price) - Number(a.net_price);
+          }
+
+          return 0;
+        });
+      }
+
+      default:
+        return products;
+    }
+  };
+
+  useEffect(() => {
+    let result = products;
+
+    result = filterByBrand(result, filters.brand);
+    result = filterByAttributes(result, filters.attributes);
+    result = sortProducts(result, filters.sort);
+
+    setFilteredProducts(result);
+  }, [filters, products]);
 
   const removeFilters = () => {
     setFilters({
-    brand: "",
-    attributes: {}
-  })
+      brand: "",
+      attributes: {},
+      sort: ""
+    });
   };
+
 
   const navigationItems = [
     { label: "دسته‌بندی‌ها", href: "/productTypes" },
@@ -155,7 +225,8 @@ const Products = ({ products, productFilters }) => {
         {/* desktop filter */}
         <div className="col-span-1 sticky top-45 flex flex-col gap-5">
 
-          <ProductSort/>
+          <ProductSort value={filters.sort}
+            onChange={updateSort}/>
 
           <Card dir="rtl">
             <CardHeader>
@@ -215,7 +286,8 @@ const Products = ({ products, productFilters }) => {
         {/* mobile filter */}
         
         <div className="flex justify-between items-center">
-            <ProductSort/>
+            <ProductSort value={filters.sort}
+            onChange={updateSort}/>
             <Sheet>
               <SheetTrigger asChild>
                 <FaFilter className="size-5"/>

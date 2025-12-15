@@ -9,13 +9,13 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const ProductSort = () => {
+const ProductSort = ({ value, onChange }) => {
   return (
     <div dir="rtl" className="flex flex-col gap-5 max-md:w-[200px]">
         <p className="max-md:hidden font-semibold lg:text-lg">مرتب سازی بر اساس</p>
-        <Select dir="rtl" className="">
+        <Select dir="rtl" className="" value={value} onValueChange={onChange}>
             <SelectTrigger className="w-full">
-                <SelectValue placeholder="انتخاب نشده" />
+                <SelectValue placeholder="انتخاب نشده" className="lg:text-lg"/>
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
