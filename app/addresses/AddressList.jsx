@@ -35,7 +35,7 @@ const AddressList = ({ addresses }) => {
         <AddressCreate setAddresses={setAddresses} />
 
         <div dir="rtl" className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          {Addresses.map((address) => (
+          {Addresses.length >= 1 ? (Addresses.map((address) => (
             <Card dir="rtl" key={address.id} className=" col-span-1">
               <CardHeader>
                 <CardTitle>
@@ -84,7 +84,9 @@ const AddressList = ({ addresses }) => {
                 </div>
               </CardFooter>
             </Card>
-          ))}
+          ))) : (
+            <p className="text-md lg:text-lg">آدرسی ثبت نشده</p>
+          )}
         </div>
       </div>
     </>

@@ -19,14 +19,9 @@ const OrderList = ({orders}) => {
   return (
     <>
     <UpdateNavigation items={navigationItems} />
-    {orders.length < 1 && (
-        <CustomEmpty title={"هنوز سفارشی ثبت نشده"}>
-          <FaListUl/>
-        </CustomEmpty>
-    )}
-
+    
     <div className='flex flex-col gap-5 '>
-        {orders.map((order)=>(
+        {orders.length >= 1 ? (orders.map((order)=>(
             <div dir="rtl" key={order.id} className="flex flex-col bg-card text-card-foreground rounded-xl border shadow-sm p-5">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
                     <div className="flex items-center gap-2 lg:gap-5">
@@ -67,7 +62,11 @@ const OrderList = ({orders}) => {
                     ))}
                 </div>
             </div>
-        ))}
+        ))) :  (
+            <CustomEmpty title={"هنوز سفارشی ثبت نشده"}>
+                <FaListUl/>
+            </CustomEmpty>
+        )}
     </div>
     </>
   )
