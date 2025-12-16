@@ -9,8 +9,8 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-ENV NEXT_PRIVATE_STANDALONE true
-ENV AUTH_TRUST_HOST true
+ENV NEXT_PRIVATE_STANDALONE=true
+ENV AUTH_TRUST_HOST=true
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* .npmrc* ./
 RUN npm ci;
