@@ -1,36 +1,55 @@
 import NextAuth from "next-auth";
-import { API_URL } from "@/apiUrl";
 import Google from "next-auth/providers/google";
+import { API_URL } from "@/apiUrl";
 
 const getORCreateUser = async (data) => {
   const res = await fetch(`${API_URL}api/users/get-or-create/`, {
     method: "POST",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-  return await res.json()
+
+  if (!res.ok) throw new Error("User sync failed");
+  return res.json();
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [Google],
+  providers: [
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
+  ],
+
   callbacks: {
-    authorized: async ({ auth }) => {
-      // Logged in users are authenticated, otherwise redirect to login page
-      return !!auth;
+    async signIn({ profile, user }) {
+      if (!profile?.email_verified) return false;
+
+      // sync user ONCE
+      const dbUser = await getORCreateUser({
+        email: profile.email,
+        name: profile.name,
+        image: profile.picture,
+      });
+
+      user.user_id = dbUser.user_id;
+      return true;
     },
-    async signIn({ profile }) {
-      if (profile.email_verified) {
-        return true;
-      } 
-      return false;
-    },
-    async session({ session }) {
-      const res = await getORCreateUser(session.user);
-      session.user.user_id = res.user_id;
+
+    async session({ session, token }) {
+      if (token.user_id) {
+        session.user.user_id = token.user_id;
+      }
       return session;
+    },
+
+    async jwt({ token, user }) {
+      if (user?.user_id) {
+        token.user_id = user.user_id;
+      }
+      return token;
     },
   },
 });
