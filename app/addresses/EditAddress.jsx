@@ -4,7 +4,6 @@ import { API_URL } from "@/apiUrl";
 
 export async function createAddress(title, address) {
   const session = await auth();
-
   const res = await fetch(`${API_URL}api/addresses/`, {
     method: "POST",
     headers: {

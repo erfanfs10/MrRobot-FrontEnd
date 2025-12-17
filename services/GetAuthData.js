@@ -1,13 +1,18 @@
 import { API_URL } from "@/apiUrl";
 import { auth } from "@/auth";
+import { cookies } from "next/headers";
 
 // get all addresses
 const getAuthData = async ({ url }) => {
   const session = await auth();
+  console.log(session, "ooooooooooooooo")
+  const cookieStore = cookies();
+  console.log((await cookieStore).toString)
+  
   const res = await fetch(
     `${API_URL}api/${url}`,
     {
-      headers: { user_id: session.user.user_id },
+      headers: { user_id: session.user.user_id, Authorization: `Bearer ${session.accessToken}`,},
     },
     { cache: "no-store" }
   );
