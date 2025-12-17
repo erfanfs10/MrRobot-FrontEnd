@@ -12,7 +12,10 @@ const getAuthData = async ({ url }) => {
   const res = await fetch(
     `${API_URL}api/${url}`,
     {
-      headers: { user_id: session.user.user_id, Authorization: `Bearer ${session.accessToken}`,},
+      headers: { user_id: session.user.user_id,
+                 Authorization: `Bearer ${session.user.user_id}`,
+                 session: session,
+              },
     },
     { cache: "no-store" }
   );
