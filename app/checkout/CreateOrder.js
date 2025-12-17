@@ -10,6 +10,7 @@ export async function createOrder(address_id, cart, totalProducts, shippingPrice
     headers: {
       "Content-Type": "application/json",
       user_id: session.user.user_id,
+      Authorization: `Bearer ${session.user.user_id}`,
     },
     body: JSON.stringify({ address_id: address_id, cart: cart,
        total_products: totalProducts, shipping_price: shippingPrice}),

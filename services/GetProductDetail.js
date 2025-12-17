@@ -9,6 +9,7 @@ const getProductDetail = async ({ url }) => {
       `${API_URL}api/${url}`,
       {
         headers: { user_id: session.user.user_id },
+        Authorization: `Bearer ${session.user.user_id}`,
       },
       { cache: "no-store" }
     );

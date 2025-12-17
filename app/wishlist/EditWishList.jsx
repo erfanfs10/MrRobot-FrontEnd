@@ -10,6 +10,7 @@ export async function deleteWishlist(productID) {
     headers: {
       "Content-Type": "application/json",
       user_id: session.user.user_id,
+      Authorization: `Bearer ${session.user.user_id}`,
     },
   });
   return { data: await res.json(), status: res.status };
@@ -23,6 +24,7 @@ export async function createWishlist(productID) {
     headers: {
       "Content-Type": "application/json",
       user_id: session.user.user_id,
+      Authorization: `Bearer ${session.user.user_id}`,
     },
     body: JSON.stringify({ product_id: productID }),
   });

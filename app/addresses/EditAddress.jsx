@@ -9,6 +9,7 @@ export async function createAddress(title, address) {
     headers: {
       "Content-Type": "application/json",
       user_id: session.user.user_id,
+      Authorization: `Bearer ${session.user.user_id}`,
     },
     body: JSON.stringify({ address: address, title: title }),
   });
@@ -22,6 +23,7 @@ export async function updateAddress(addressID, newTitle, newAddress) {
     headers: {
       "Content-Type": "application/json",
       user_id: session.user.user_id,
+      Authorization: `Bearer ${session.user.user_id}`,
     },
     body: JSON.stringify({ address: newAddress, title: newTitle }),
   });
@@ -36,6 +38,7 @@ export async function deleteAddress(addressID) {
     headers: {
       "Content-Type": "application/json",
       user_id: session.user.user_id,
+      Authorization: `Bearer ${session.user.user_id}`,
     },
   });
   return res.status;
