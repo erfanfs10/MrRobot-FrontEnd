@@ -35,7 +35,7 @@ const CarouselPosts = ({ posts }) => {
         }),
       ]}
     >
-      <CarouselContent className="-ml-45 md:-ml-30 lg:-ml-4 my-3">
+      <CarouselContent className="-ml-40 md:-ml-30 lg:-ml-4 my-3">
         {posts.map((post) => (
           <CarouselItem
             key={post.id}
