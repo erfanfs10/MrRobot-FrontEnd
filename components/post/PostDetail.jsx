@@ -67,8 +67,8 @@ const PostDetail = ({ data }) => {
                         {post.excerpt}
                       </p>
                     </div>
-                    <img
-                      src={"http://192.168.254.40:8080/static/" + post.image}
+                    <Image
+                      src={post.image}
                       alt={post.title}
                       className="size-25 lg:size-30 aspect-square object-cover rounded-lg"
                     />
