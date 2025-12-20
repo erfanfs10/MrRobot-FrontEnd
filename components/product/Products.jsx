@@ -193,7 +193,7 @@ const Products = ({ products, productFilters, productTypeTitle }) => {
   const navigationItems = [
     { label: "دسته‌بندی‌ها", href: "/productTypes" },
     {
-      label: products.items.length > 0 ? products.items[0].category_farsi : "",
+      label: products.items.length > 0 ? products.items[0].product_type_farsi : "",
       href: products.items.length > 0 ? `/productTypes/${products.items[0].product_type}` : "",
     },
   ];
