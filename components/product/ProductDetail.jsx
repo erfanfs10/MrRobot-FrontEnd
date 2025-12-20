@@ -199,6 +199,16 @@ const ProductDetail = ({ product }) => {
     }
   }
 
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("لینک محصول کپی شد");
+    } catch (err) {
+      console.error('Failed to copy: ');
+    }
+
+  }
+
   return (
     <>
       <UpdateNavigation items={navigationItems} />
@@ -267,7 +277,7 @@ const ProductDetail = ({ product }) => {
                 <div className="flex gap-7">
                   {GetWishlists()}
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger onClick={copyToClipboard}>
                       <IoShareSocial className="size-6 hover:scale-110 duration-200 cursor-pointer" />
                     </TooltipTrigger>
                     <TooltipContent>
