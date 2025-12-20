@@ -71,13 +71,13 @@ export default function SearchBar() {
 
       {results.length >= 1 &&
         <Card className="absolute left-0 right-0 p-3 mt-2 z-50 shadow-lg">
-          <CardHeader className="flex items-center font-semibold justify-center">
+          {/* <CardHeader className="flex items-center font-semibold justify-center">
             <Link 
               className="text-sm lg:text-base tracking-wide p-2 hover:scale-105 duration-200 cursor-pointer rounded-lg"
               href={``}>
               مشاهده محصولات
             </Link>
-          </CardHeader>
+          </CardHeader> */}
           
           <CardContent className="px-0">
             {results.slice(0,3).map((item) => (
