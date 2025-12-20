@@ -28,7 +28,6 @@ export default async function Home() {
       />
       <RandomPosts
         title="پست های جدید"
-        buttonText="نمایش همه پست ها"
       />
       <FAQ/>
       {/* <ProductDetail /> */}
