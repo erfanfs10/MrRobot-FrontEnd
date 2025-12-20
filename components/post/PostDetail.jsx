@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import displayDate from "@/utils/DisplayDate";
 import PostTags from "./PostTags";
+import Image from "../Image";
 
 const PostDetail = ({ data }) => {
   const navigationItems = [
@@ -24,10 +25,10 @@ const PostDetail = ({ data }) => {
         <div className="col-span-1 lg:col-span-3">
           <Card dir="rtl">
             <CardHeader className="">
-              <img
-                src={"http://192.168.254.40:8080/static/" + data.post.image}
+              <Image
+                src={data.post.image}
                 alt={data.post.title}
-                className="aspect-3/2 object-cover rounded-lg"
+                className="aspect-3/2 object-contain rounded-lg"
               />
             </CardHeader>
             <CardContent>

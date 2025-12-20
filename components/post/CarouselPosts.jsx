@@ -17,6 +17,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import Image from "../Image";
 
 const CarouselPosts = ({ posts }) => {
   return (
@@ -49,10 +50,10 @@ const CarouselPosts = ({ posts }) => {
                 rel="noopener noreferrer"
               >
                 <CardHeader className="px-3">
-                  <img
-                    src={"http://192.168.254.40:8080/static/" + post.image}
+                  <Image
+                    src={post.image}
                     alt={post.title}
-                    className="aspect-3/2 object-cover rounded-lg"
+                   className="p-2 object-contain rounded-xl"
                   />
                 </CardHeader>
               </Link>
