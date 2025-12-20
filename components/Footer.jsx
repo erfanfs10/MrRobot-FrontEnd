@@ -44,7 +44,7 @@ const Footer = () => {
           <p className="text-lg font-bold">تماس با ما</p>
           <p className="text-md">📧 ایمیل: MrRobot@gmail.com</p>
           <p className="text-md">📍 نشانی: تهران</p>
-          <p className="text-md">📞 شماره تماس : 4444 - ۰۲۱</p>
+          <p className="text-md">📞 شماره تماس : ۵۶۴۶۷۳۲۱ - ۰۲۱</p>
         </div>
       </div>
       <p className="text-sm lg:text-base font-bold">
