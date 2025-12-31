@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import UpdateNavigation from "@/components/navigation/UpdateNavigation";
 import CustomCardFooter from "@/components/product/CustomCardFooter";
 import displayBadge from "@/utils/DisplayBadge";
+import productListMobileBadge from "@/utils/ProductListMobileBadge";
 import { HiOutlineEmojiSad } from "react-icons/hi";
 import {
   Sheet,
@@ -386,7 +387,7 @@ const Products = ({ products, productFilters, productTypeTitle }) => {
               rel="noopener noreferrer"
             >
               <div className="relative grid grid-cols-2 bg-card text-card-foreground rounded-xl border shadow-sm w-full h-[200px] overflow-hidden">
-                {displayBadge(product.used)}
+                {productListMobileBadge(product.used)}
 
                 <div className="col-span-1 flex flex-col items-start justify-between p-3">
                   <p className="font-bold text-lg tracking-wide mt-7">

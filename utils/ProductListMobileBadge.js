@@ -1,11 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 
-const displayBadge = (used) => {
+const productListMobileBadge = (used) => {
     if (used === true) {
         return (
             <Badge
                 variant="destructive"
-                className="absolute -top-2 lg:-top-2 -right-2 lg:-right-2 text-xs lg:text-sm"
+                className="absolute top-2 lg:-top-2 left-2 lg:-left-2 text-xs lg:text-sm"
             >
                 کارکرده
             </Badge>
@@ -14,7 +14,7 @@ const displayBadge = (used) => {
         return (
             <Badge
                 variant="default"
-                className="absolute -top-2 lg:-top-2 -right-2 lg:-right-2 text-xs lg:text-sm"
+                className="absolute top-2 lg:-top-2 left-2 lg:-left-2 text-xs lg:text-sm"
             >
                 آکبند
             </Badge>
@@ -22,4 +22,4 @@ const displayBadge = (used) => {
     }
 };
 
-export default displayBadge
+export default productListMobileBadge
